@@ -81,7 +81,7 @@
           <h5 class="modal-title" id="staticBackdropLabel">Checkout</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" id-="tabs">
+        <div class="modal-body">
           <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link ml-3 active" id="pills-home-tab" data-bs-toggle="pill"
@@ -89,15 +89,15 @@
                 aria-selected="true">Payment</button>
             </li>
             <li class="nav-item ml-3" role="presentation">
-              <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+              <button class="nav-link" id="pills-billing-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
                 type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Billing</button>
             </li>
             <li class="nav-item ml-3" role="presentation">
-              <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+              <button class="nav-link" id="pills-shipping-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
                 type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Shipping</button>
             </li>
             <li class="nav-item ml-3" role="presentation">
-              <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-confirm"
+              <button class="nav-link" id="pills-confirm-tab" data-bs-toggle="pill" data-bs-target="#pills-confirm"
                 type="button" role="tab" aria-controls="pills-confirm" aria-selected="false">Confirm</button>
             </li>
           </ul>
@@ -124,18 +124,22 @@
                 <div class="d-flex flex-column">
                   <label for="expr" class="text mb-1">Expiring Date</label>
                   <input class="form-control mb-3" type="text" placeholder="MM/YYYY" id="expiry" name="expiry">
-                  <strong><span id="validExpiry"></strong></span>
+                  <small><span id="validExpiry"></span></small>
                 </div>
               </div>
               <div class="col-6">
                 <div class="d-flex flex-column">
                   <label for="cvc" class="text mb-1">CVV/CVC</label>
                   <input class="form-control mb-3 pt-2 " type="password" placeholder="***" id="cvc" name="cvc">
-                  <strong><span id="validSerialNum"></strong></span>
+                  <small><span id="validSerialNum"></span></small>
                 </div>
               </div>
 
-              <button type="button" class="btn btn-primary continue">Continue</button>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary verify">Next</button>
+              </div>
+
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
@@ -144,26 +148,24 @@
               <div class="row g-3 p-3">
                 <div class="col-sm-6">
                   <label for="firstName" class="form-label">First name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                  <strong><span id="validFirst"></strong></span>
+                  <input type="text" class="form-control" id="first-name" placeholder="" value="" required="">
                 </div>
 
                 <div class="col-sm-6">
                   <label for="lastName" class="form-label">Last name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                  <strong><span id="validLast"></strong></span>
+                  <input type="text" class="form-control" id="last-name" placeholder="" value="" required="">
                 </div>
 
                 <div class="col-12">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                  <strong><span id="validEmail"></strong></span>
+                  <small><span id="valid-email"></span></small>
                 </div>
 
                 <div class="col-12">
                   <label for="address" class="form-label">Address</label>
                   <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
-                  <strong><span id="validAdd"></strong></span>
+                  <small><span id="valid-address"></span></small>
                 </div>
 
                 <div class="col-12">
@@ -173,34 +175,43 @@
 
                 <div class="col-10">
                   <label for="phone" class="form-label">Phone Number</label>
-                  <input type="text" class="form-control" id="phone" placeholder="(250) 555-1234">
-                  <strong><span id="validPhone"></strong></span>
+                  <input type="text" class="form-control" id="phone-number" placeholder="(250) 555-1234">
+                  <small><span id="valid-phone"></span></small>
                 </div>
 
                 <div class="col-sm-6">
-                  <label for="country" class="form-label">Country</label>
-                  <input type="text" class="form-control" id="country" placeholder="Country" value="" required="">
-                  <strong><span id="validCountry"></strong></span>
+                  <label for="country" class="form-label">Country:</label>
+                  <select name="country" id="country">
+                    <option value="canada">Canada</option>
+                    <option value="america">America</option>
+                  </select>
+                  <small><span id="valid-country"></span></small>
                 </div>
 
                 <div class="col-sm-6">
                   <label for="city" class="form-label">City</label>
                   <input type="text" class="form-control" id="city" placeholder="Victoria" value="" required="">
-                  <strong><span id="validCity"></strong></span>
+                  <small><span id="valid-city"></span></small>
                 </div>
 
                 <div class="col-sm-6">
                   <label for="province" class="form-label">Province</label>
                   <input type="text" class="form-control" id="province" placeholder="British Columbia" value=""
                     required="">
-                  <strong><span id="validProvince"></strong></span>
+                  <small><span id="valid-province"></span></small>
                 </div>
 
                 <div class="col-md-3">
                   <label for="zip" class="form-label">Zip</label>
                   <input type="text" class="form-control" id="zip" placeholder="V9E4B9" required="">
-                  <strong><span id="validZIP"></strong></span>
+                  <small><span id="valid-zip"></span></small>
                 </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary verify2">Next</button>
+                </div>
+
               </div>
             </div>
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
@@ -212,71 +223,76 @@
               <div class="row g-3 p-3" id="shipping_details">
                 <div class="col-sm-6">
                   <label for="firstName" class="form-label">First name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                  <strong><span id="validFirst"></strong></span>
+                  <input type="text" class="form-control" id="first-name2" placeholder="" value="" required="">
                 </div>
 
                 <div class="col-sm-6">
                   <label for="lastName" class="form-label">Last name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                  <strong><span id="validLast"></strong></span>
+                  <input type="text" class="form-control" id="last-name2" placeholder="" value="" required="">
                 </div>
 
                 <div class="col-12">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                  <strong><span id="validEmail"></strong></span>
+                  <input type="email" class="form-control" id="email2" placeholder="you@example.com">
+                  <small><span id="valid-email2"></span></small>
                 </div>
 
                 <div class="col-12">
                   <label for="address" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
-                  <strong><span id="validAdd"></strong></span>
+                  <input type="text" class="form-control" id="address22" placeholder="1234 Main St" required="">
+                  <small><span id="valid-address2"></span></small>
                 </div>
 
                 <div class="col-12">
                   <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                  <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                  <input type="text" class="form-control" id="address2_2" placeholder="Apartment or suite">
                 </div>
 
                 <div class="col-10">
                   <label for="phone" class="form-label">Phone Number</label>
-                  <input type="text" class="form-control" id="phone" placeholder="(250) 555-1234">
-                  <strong><span id="validPhone"></strong></span>
+                  <input type="text" class="form-control" id="phone-number2" placeholder="(250) 555-1234">
+                  <small><span id="valid-phone2"></span></small>
                 </div>
 
                 <div class="col-sm-6">
-                  <label for="country" class="form-label">Country</label>
-                  <input type="text" class="form-control" id="country" placeholder="Country" value="" required="">
-                  <strong><span id="validCountry"></strong></span>
+                  <label for="country" class="form-label">Country:</label>
+                  <select name="country" id="country2">
+                    <option value="canada">Canada</option>
+                    <option value="america">America</option>
+                  </select>
+                  <small><span id="valid-country2"></span></small>
                 </div>
 
                 <div class="col-sm-6">
                   <label for="city" class="form-label">City</label>
-                  <input type="text" class="form-control" id="city" placeholder="Victoria" value="" required="">
-                  <strong><span id="validCity"></strong></span>
+                  <input type="text" class="form-control" id="city2" placeholder="Victoria" value="" required="">
+                  <small><span id="valid-city2"></span></small>
                 </div>
 
                 <div class="col-sm-6">
                   <label for="province" class="form-label">Province</label>
-                  <input type="text" class="form-control" id="province" placeholder="British Columbia" value=""
+                  <input type="text" class="form-control" id="province2" placeholder="British Columbia" value=""
                     required="">
-                  <strong><span id="validProvince"></strong></span>
+                  <small><span id="valid-province2"></span></small>
                 </div>
 
                 <div class="col-md-3">
                   <label for="zip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="zip" placeholder="V9E4B9" required="">
-                  <strong><span id="validZIP"></strong></span>
+                  <input type="text" class="form-control" id="zip2" placeholder="V9E4B9" required="">
+                  <small><span id="valid-zip2"></span></small>
                 </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary verify3">Next</button>
+                </div>
+
               </div>
             </div>
-            <div class="tab-pane fade" id="pills-confirm" role="tabpanel" aria-labelledby="pills-confirm-tab">...</div>
+            <div class="tab-pane fade" id="pills-confirm" role="tabpanel" aria-labelledby="pills-confirm-tab">
+              <div id="checkout-items"></div>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary continue">Continue</button>
         </div>
       </div>
     </div>

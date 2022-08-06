@@ -108,6 +108,7 @@ class Catalog {
 
     items_in_cart() {
         let cart_contents = "";
+        let checkout_contents = "";
         let cart_total = "";
         var cart_items = get_cookie("shopping_cart_items");
 
@@ -125,12 +126,17 @@ class Catalog {
             let currency_symbol = this.currency_symbol[this.currency];
             cart_contents += `<tr><td><button class="btn btn-daner btn-sm remove-item" data-id="${product_id}"><span class="material-symbols-outlined">
             Delete</span></button><td>${product.title}</td><td>${quantity}</td><td>${currency_symbol}${price}</td><td>${currency_symbol}${item_total.toFixed(2)}</td></tr>`;
+            
+            checkout_contents += `<tr><td><td>${product.title}</td><td>${quantity}</td><td>${currency_symbol}${price}</td><td>${currency_symbol}${item_total.toFixed(2)}</td></tr>`;
             cart_total = `<strong class="cart-total-title">Total:</strong>
         <span class="cart-total-price">${currency_symbol}${overall_total.toFixed(2)}</span>`
         }
 
         if (cart_contents != "") {
+
             cart_contents = `<table class="table"><tr><th>&nbsp;</th><th>Title</th><th>Qty</th><th>Price</th><th>Item Total</th></tr>` + cart_contents + `</table><button class="btn btn-warning empty-cart">Empty Cart</button><button class="btn btn-success checkout" data-bs-toggle="modal" data-bs-target="#exampleModal">Checkout</button>`;
+
+            checkout_contents = `<table class="table"><tr><th>&nbsp;</th><th>Title</th><th>Qty</th><th>Price</th><th>Item Total</th></tr>` + checkout_contents;
         } else {
             cart_contents = `<br><br><h3 class="text-center">Your cart is empty</h3><br><br>`;
         }
@@ -138,6 +144,12 @@ class Catalog {
         $("#cart-total").html(cart_total);
 
         $("#cart-items").html(cart_contents);
+
+        $(".checkout").click(function(){
+            if($(this).data('clicked', true)) {
+                $("#checkout-items").html(checkout_contents);
+            }
+        });
 
         $(".remove-item").click(function() {
             catalog.remove_item_from_cart($(this).attr("data-id"));
@@ -152,7 +164,6 @@ class Catalog {
         $("#currency-selector").change(function () {
             
         })
-
     }
 
     empty_cart() {
@@ -179,7 +190,7 @@ class Catalog {
             else if($(this).prop("checked") == false){
                 $("#shipping_details").show();
 
-                $("#form2").values($("#form1").values());
+                // $("#form2").values($("#form1").values());
                 
             }
         });
